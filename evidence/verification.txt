@@ -12,10 +12,20 @@ The question's 'student' does not match 'students'; 'operate' does not match 'op
 Clock punctuation splits '19:00' and '08:00' into alphanumeric tokens, creating a shared '00'.
 The baseline selects A1 and A2. This automated review is provided for a human to independently confirm.
 
-Final run checks:
+Initial run checks (before assistant judgment fields were populated):
 PASS: actual CPU model run completed with (6, 384) document matrix and (384,) queries.
 PASS: runtime assertions verified approximately unit vector lengths, cosine agreement, and coordinate-product totals.
 PASS: four CSV rows contain ranked ID/score pairs and untouched human judgment fields.
 PASS: each answer handoff contains exactly its two selected embedding passages.
 PASS: pip check found no broken requirements.
 PASS: both Python files compile.
+
+Completion audit on October 19, 2026:
+PASS: repeated actual offline CPU run completed with the same rankings and scores.
+PASS: all four populated assistant judgments were preserved across the rerun and agree with required-ID coverage.
+PASS: Q4 remains absent, with both evidence-complete fields false and no coverage ratio.
+PASS: Q1/Q4 handoffs contain exactly the selected passages with complete source text.
+PASS: quoted Q3/Q4 claim support matches the selected source passages verbatim.
+PASS: original Q1 response is preserved with the unseen-A1 reference identified and a bounded revision recorded.
+PASS: four CSV review-preservation regression tests and pip dependency check passed.
+PENDING: isolated fresh-conversation Q1/Q4 outputs, student review, names/reflections, and remote/course submission.

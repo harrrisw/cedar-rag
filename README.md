@@ -19,7 +19,7 @@ $env:HF_HOME = Join-Path (Get-Location) '.cache\huggingface'
 
 Use `requirements.txt` for an unpinned initial installation; `requirements-lock.txt` records the actual installed environment after a successful assignment run. `evidence/environment.txt` and the embedding output record exact versions. The keyword command also works with system Python and no third-party packages.
 
-`run_assignment.py` encodes documents once and reuses that matrix for Q1–Q4 and the k experiment. It overwrites run evidence and resets judgment fields in `results.csv`; preserve completed human judgments before rerunning. It preserves existing answer audit files.
+`run_assignment.py` encodes documents once and reuses that matrix for Q1–Q4 and the k experiment. It overwrites run evidence but preserves existing CSV judgments when all recorded evidence fields for that question are unchanged. New or changed rows have blank judgment fields for review. Existing answer audit files are preserved; if a rerun changes selected passages, their old audits must be reviewed against the new evidence.
 
 ## What the code does
 
@@ -46,14 +46,22 @@ The pretrained embedding model selects candidate evidence. A separate language m
 - `evidence/keyword-q1.txt`: actual baseline output.
 - `evidence/embedding-inspection.txt`: real model vectors and similarity calculation.
 - `evidence/retrieval-runs.txt`: all four questions through both methods, k=2.
-- `results.csv`: selected IDs and scores in rank order; human judgment fields intentionally blank.
+- `results.csv`: selected IDs and scores in rank order, with assistant evidence-completeness judgments and observations awaiting your independent review. Q4 is false for both methods because the answer is absent; successful abstention is a separate answer-audit result.
 - `evidence/k-experiment.txt`: actual Q1 selections and required coverage for k=1, 2, 3.
 - `evidence/answer-handoff-q1.txt` and `answer-handoff-q4.txt`: paste each into a separate fresh conversation with no project file access. Each contains only the assignment's answer instruction, question, and selected passages.
-- `evidence/answer-audit-q1.md` and `answer-audit-q4.md`: preserve the generated answers and complete the human claim audit. These remain pending until the fresh conversations and human audit occur.
+- `evidence/answer-audit-q1.md` and `answer-audit-q4.md`: original project-chat answers, revisions, and assistant claim audits. Q1 records a correction for referencing an unseen chunk. The required isolated answer runs and human audit remain pending. Append those actual outputs without overwriting the preserved responses.
+- `evidence/answer-audit-q3.md`: additional answer and citation review requested by the user.
+- `REQUIREMENTS_AUDIT.md`: requirement-by-requirement completion status and remaining submission gaps.
 - `HUMAN_REVIEW.md`: review sequence and outstanding submission items.
 
 Do not treat an embedding score as evidence that a passage answers the question, and do not compare raw keyword scores numerically with cosine scores. Q4's answer is absent from the corpus even though the embedding retriever always returns the top k passages. Q1 coverage counts both A1 and A2, even if A2 alone could support a yes/no decision.
 
+The saved rankings show keyword coverage of 2/2 for Q1 versus embedding coverage of 1/2. Both methods cover Q2 and Q3 (1/1 each). At k=1, 2, and 3, Q1 embedding coverage stays 1/2: T1 adds training conditions and B1 adds booking information, while A1 remains fourth. The minimum and maximum displayed coordinates are T1's fifth (-0.1167) and twelfth (0.1357), counting from 1; neither coordinate individually labels meaning.
+
+Verify CSV review preservation with `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. Dependency consistency can be checked with `.\.venv\Scripts\python.exe -m pip check`.
+
 ## GitHub submission
 
 The local repository is initialized. Review artifacts and finish human-only items before submission. Then create or identify your GitHub repository named `cedar-rag`, commit the source and evidence, and push. `.gitignore` excludes the virtual environment, temporary files, model cache, and bytecode. A GitHub destination and the sign-up-sheet URL were not supplied. No submission is claimed until the push and sign-up-sheet entry actually succeed.
+
+A network-enabled GitHub authentication check succeeded for `harrrisw` during the completion audit. No remote is configured, and an authenticated check could not resolve `harrrisw/cedar-rag`; repository creation/destination and visibility remain to be confirmed.

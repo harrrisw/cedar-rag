@@ -20,6 +20,24 @@ def capture(name, function):
     return result
 
 
+def save_results(rows, path=ROOT / "results.csv"):
+    """Keep existing judgments only when the question's recorded evidence is unchanged."""
+    judgments = ("keyword_evidence_complete", "embedding_evidence_complete", "observation")
+    previous = {}
+    if path.exists():
+        with path.open(newline="", encoding="utf-8") as stream:
+            previous = {row["question_id"]: row for row in csv.DictReader(stream)}
+    for row in rows:
+        old = previous.get(row["question_id"], {})
+        if all(old.get(key) == value for key, value in row.items() if key not in judgments):
+            for key in judgments:
+                row[key] = old.get(key, "")
+    with path.open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def main():
     EVIDENCE.mkdir(exist_ok=True)
     chunks = load_chunks()
@@ -49,10 +67,7 @@ def main():
                 "keyword_evidence_complete": "", "embedding_evidence_complete": "", "observation": "",
             })
     capture("retrieval-runs.txt", comparisons)
-    with (ROOT / "results.csv").open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
-        writer.writeheader()
-        writer.writerows(rows)
+    save_results(rows)
 
     def experiment():
         print("Q1 requires A1 and A2. Coverage = retrieved required IDs / 2.")
@@ -72,7 +87,7 @@ def main():
     packages = subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True)
     (ROOT / "requirements-lock.txt").write_text(packages, encoding="utf-8")
     (EVIDENCE / "environment.txt").write_text(f"Python {platform.python_version()}\nCPU run; locally generated output, not borrowed.\n{packages}", encoding="utf-8")
-    print("Saved vector inspection, four comparisons, k experiment, results.csv, and isolated answer handoffs. Human judgments remain blank.")
+    print("Saved vector inspection, four comparisons, k experiment, results.csv, and isolated answer handoffs. Existing judgments are preserved when recorded evidence is unchanged; new or changed rows need review.")
 
 
 if __name__ == "__main__":

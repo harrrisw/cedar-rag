@@ -8,4 +8,6 @@ The first restricted-network package installation reported `ERROR: Could not fin
 
 `gh auth status` found the existing GitHub credential invalid. Remote publication requires reauthentication and a specified destination.
 
+Correction from the October 19 completion audit: the earlier status check ran under restricted execution. A network-enabled `gh auth status` now succeeds for `harrrisw`, so reauthentication is not currently required. No remote is configured; an authenticated `gh repo view harrrisw/cedar-rag` could not resolve the repository. Publication still needs a repository destination/creation and the course submission URL.
+
 The MiniLM download completed from Hugging Face at snapshot `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. Ten configuration, tokenizer, pooling, and safetensors files were cached inside the ignored `.cache/huggingface` directory. The assignment run was launched with `HF_HUB_OFFLINE=1` to use those downloaded files without network requests.

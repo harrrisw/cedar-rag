@@ -1,5 +1,5 @@
 question_id,keyword_top_ids,keyword_scores,embedding_top_ids,embedding_scores,required_ids,keyword_evidence_complete,embedding_evidence_complete,observation
-Q1,A1;A2,3;2,A2;T1,0.68644565;0.58195293,A1;A2,,,
-Q2,A2;B1,2;1,A2;T1,0.58519334;0.43476090,A2,,,
-Q3,T1;A2,2;1,T1;B1,0.74202764;0.47119549,T1,,,
-Q4,A2;B1,1;1,T1;A2,0.34772146;0.32082719,absent,,,
+Q1,A1;A2,3;2,A2;T1,0.68644565;0.58195293,A1;A2,true,false,Assistant judgment pending student review: keyword coverage 2/2; embedding coverage 1/2 because A1 is missing. A2=0.68644565 does not supply the access-hours window.
+Q2,A2;B1,2;1,A2;T1,0.58519334;0.43476090,A2,true,true,Assistant judgment pending student review: both methods retrieve A2; coverage 1/1. Embedding A2=0.58519334 matches the another-person paraphrase to the two-trained-people rule.
+Q3,T1;A2,2;1,T1;B1,0.74202764;0.47119549,T1,true,true,Assistant judgment pending student review: both methods retrieve T1; coverage 1/1. Embedding T1=0.74202764 matches refresh qualification to training renewal every 12 months.
+Q4,A2;B1,1;1,T1;A2,0.34772146;0.32082719,absent,false,false,Assistant judgment pending student review: wavelength is absent; coverage ratio is not applicable. Embedding T1=0.34772146 is a nearest passage rather than answer evidence; top-k retrieval always returns candidates. A correct answer must abstain.
