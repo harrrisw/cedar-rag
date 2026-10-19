@@ -11,7 +11,7 @@ Reviewed against `PS05 and Lesson 10 — RAG Systems.docx` on October 19, 2026. 
 | Real all-MiniLM-L6-v2 CPU model loads; installed versions recorded | Complete; actual output in `evidence/embedding-inspection.txt`, package versions and model snapshot in README. |
 | Use a Codex project capable of files and Python | The current project workspace has been used to create files and execute Python; any separate course-specific app setup should be confirmed by the participant. |
 | Exactly six verbatim paragraphs in the three required files | Verified against DOCX; `docs/access.txt`, `docs/training.txt`, `docs/booking.txt`. IDs and filenames are separate metadata. |
-| Partner agreement and halfway role swap if working in pairs | Pending applicability: participant must identify solo/partner status and confirm any actual role swap. No partner work is invented. |
+| Partner agreement and halfway role swap if working in pairs | Not applicable: Mingxi Wang confirmed working individually. |
 
 ## Task 1: keyword baseline
 
@@ -67,7 +67,7 @@ Reviewed against `PS05 and Lesson 10 — RAG Systems.docx` on October 19, 2026. 
 | --- | --- |
 | Source files, retriever code, reproducible commands and package/model versions | Complete; README, requirements files, docs and scripts. |
 | Evidence folder includes vectors, comparison, k experiment, two answer audits | Files exist and assistant audits are populated; isolated answer outputs and independent review remain pending. |
-| Partner/participant names in README | **Pending actual names and solo/partner status.** Git account identity is not assumed to be the participant name. |
+| Partner/participant names in README | Complete: Mingxi Wang, working individually, as supplied by the participant. |
 | Individual reflection no longer than 150 words per participant | **Pending participant writing** in `reflections.md`; the handout explicitly says not to ask Codex to write the personal explanation. |
 | Source labels for borrowed output | Not applicable: recorded retrieval output was generated locally. |
 | Push to the participant's GitHub repository of the same name | **Pending repository destination/creation.** Network-enabled authentication succeeds for `harrrisw`; no remote is configured. `harrrisw/cedar-rag` could not be resolved by the authenticated read-only check. |
@@ -75,10 +75,9 @@ Reviewed against `PS05 and Lesson 10 — RAG Systems.docx` on October 19, 2026. 
 
 ## Remaining inputs
 
-1. Participant name(s), solo/partner status, and actual role-swap details if applicable.
-2. Your own reflection, at most 150 words per participant, and confirmation or corrections to the assistant judgments.
-3. Actual fresh-conversation Q1 and Q4 outputs and your claim audits.
-4. GitHub destination or new repository visibility, and the course sign-up-sheet URL. Authentication is verified working.
+1. Your own reflection, at most 150 words, and confirmation or corrections to the assistant judgments. Participant details are complete: Mingxi Wang, working individually. Assistant idea notes are available in `REFLECTION_IDEAS.md`.
+2. Actual fresh-conversation Q1 and Q4 outputs and your claim audits.
+3. GitHub destination or new repository visibility, and the course sign-up-sheet URL. Authentication is verified working for `harrrisw`; no new login is needed.
 
 The rubric allocates 3 points to visible embeddings, 3 to retrieval comparison, 2 to grounded answer audits, and 2 to reproducibility/explanation. Technical artifacts support assessment, but full marks are not claimed while required independent work and submission steps are pending.
 

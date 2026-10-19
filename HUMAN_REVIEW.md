@@ -45,10 +45,10 @@ Check every factual claim against the cited passage. For Q1 check the two-traine
 
 ## 3. Finish personal and submission details
 
-Supply participant/partner names in the README. Write your own reflection (at most 150 words per participant) in `reflections.md`; the handout says not to ask Codex to write it. Describe the actual evidence path, an observed limitation, and one proposed test.
+Participant details are recorded in the README: Mingxi Wang, working individually. No partner role swap is applicable. Write your own reflection (at most 150 words) in `reflections.md`; the handout says not to ask Codex to write it. Assistant idea notes by task are provided in `REFLECTION_IDEAS.md`, separately from the pending personal reflection. Describe the actual evidence path, an observed limitation, and one proposed test.
 
 The local Git repository is initialized. A network-enabled GitHub CLI check on October 19, 2026 confirmed a working login for `harrrisw`; the earlier restricted check's invalid-token report is no longer a submission blocker. There is no configured remote, and `gh repo view harrrisw/cedar-rag` could not resolve a repository. Supply the intended GitHub repository URL (or confirm a new repository's destination and visibility) and the sign-up-sheet URL. No remote upload or course submission has occurred.
 
 ## Review response requested
 
-After completing the checks, provide your retrieval judgments, original Q1/Q4 answer responses and claim audit, participant names, and your personal reflection. Also provide the GitHub destination and course submission link if you want help completing submission.
+After completing the checks, provide your retrieval judgments, original Q1/Q4 answer responses and claim audit, and your personal reflection. Your name and solo status have already been supplied and recorded. Also provide the GitHub destination or new repository visibility and the course submission link to finish submission.

@@ -1,6 +1,6 @@
 # Cedar Lab RAG assignment
 
-Teaching workflow over six fictional classroom passages. This is not operational laboratory guidance. Participant/partner names: **pending human input**. Personal reflections belong in `reflections.md` and must be written by the participants.
+Teaching workflow over six fictional classroom passages. This is not operational laboratory guidance. Participant: **Mingxi Wang**, working individually (no partner). The personal reflection belongs in `reflections.md` and must be written by the participant.
 
 ## Setup and run (PowerShell)
 
