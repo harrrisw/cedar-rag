@@ -1,67 +1,81 @@
-# Cedar Lab RAG assignment
+# Cedar Lab RAG
 
-Teaching workflow over six fictional classroom passages. This is not operational laboratory guidance. Participant: **Mingxi Wang**, working individually (no partner). The personal reflection belongs in `reflections.md` and must be written by the participant.
+**Mingxi Wang | Individual submission**
 
-## Setup and run (PowerShell)
+A classroom retrieval-augmented generation workflow over six fictional Cedar Lab passages. It compares keyword matching with real CPU embeddings, inspects retrieved evidence, and prepares passage-only inputs for cited answers. The fictional rules are not operational laboratory guidance.
 
-Python 3.13.4 was found on this machine. A local `.venv` is used; the model runs on CPU without a model API key. Initial installation and model download require internet access.
+## Run the project
 
-Model: `sentence-transformers/all-MiniLM-L6-v2`, downloaded snapshot `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. Installed versions: `sentence-transformers==6.1.0`, `numpy==2.5.4`, `torch==2.14.1`, `transformers==5.20.2`.
+Tested with Python 3.13.4 on Windows. In PowerShell, from the repository root:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --no-compile -r requirements-lock.txt
 $env:HF_HOME = Join-Path (Get-Location) '.cache\huggingface'
+
 .\.venv\Scripts\python.exe retriever.py keyword 'May a trained graduate student operate the laser alone at 19:00?' -k 2
 .\.venv\Scripts\python.exe retriever.py embedding 'May a trained graduate student operate the laser alone at 19:00?' -k 2 --inspect
 .\.venv\Scripts\python.exe run_assignment.py
 ```
 
-Use `requirements.txt` for an unpinned initial installation; `requirements-lock.txt` records the actual installed environment after a successful assignment run. `evidence/environment.txt` and the embedding output record exact versions. The keyword command also works with system Python and no third-party packages.
+The first model download needs internet access; no API key or GPU is needed. After the model is cached, set `$env:HF_HUB_OFFLINE = '1'` to run offline. The keyword command also works with system Python and no third-party packages. `requirements.txt` lists the two direct dependencies; `requirements-lock.txt` records the installed environment.
 
-`run_assignment.py` encodes documents once and reuses that matrix for Q1–Q4 and the k experiment. It overwrites run evidence but preserves existing CSV judgments when all recorded evidence fields for that question are unchanged. New or changed rows have blank judgment fields for review. Existing answer audit files are preserved; if a rerun changes selected passages, their old audits must be reviewed against the new evidence.
+Model: `sentence-transformers/all-MiniLM-L6-v2`, downloaded snapshot `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`. Recorded versions: sentence-transformers **6.1.0**, numpy **2.5.4**, torch **2.14.1**, transformers **5.20.2**. See [environment evidence](evidence/environment.txt) for the full list.
 
-## What the code does
+## Results
 
-`retriever.py` loads the three text files, splits on blank lines, and separates each ID from its paragraph. IDs and filenames remain metadata. Only paragraph text is searched or encoded.
+| Question | Keyword top 2 | Embedding top 2 | Evidence assessment |
+| --- | --- | --- | --- |
+| Q1: operate alone at 19:00? | A1, A2 | A2, T1 | Keyword covers 2/2 required passages; embeddings cover 1/2 and omit access hours. |
+| Q2: laser without another person? | A2, B1 | A2, T1 | Both retrieve A2: coverage 1/1. |
+| Q3: refresh laser qualification? | T1, A2 | T1, B1 | Both retrieve T1: coverage 1/1; embeddings score it 0.74202764. |
+| Q4: laser wavelength? | A2, B1 | T1, A2 | No source specifies wavelength. Similar candidates do not establish an answer. |
 
-- Loading: `load_chunks()`, lines 27–37.
-- Keyword scoring: `words()` and `keyword_rank()`, lines 40–46. Words become sets, so repetitions do not add points. The exact specified stopword list is removed from both query and text. Each score counts the intersection of those sets.
-- Keyword ranking: line 47 sorts by negative score, then chunk ID. Selection keeps up to k positive scores. No stemming or synonym expansion is used.
-- Document encoding: `EmbeddingRetriever.__init__()`, especially line 76. `encode_document()` maps each of six passages to 384 coordinates and normalizes each vector.
-- Question encoding: line 100 uses `encode_query()` with the same model. For this model, these role-specific methods use the same underlying encoding behavior.
-- Similarity: line 103 multiplies matching coordinates and sums them. Line 106 sorts all six similarities, using ID to break ties. The first k records are returned without a relevance threshold.
+The exact scores and evidence judgments are in [results.csv](results.csv), prepared with Codex assistance. Keyword counts and cosine similarities use different scales and must not be compared numerically across methods.
 
-The document matrix has shape `(6, 384)`; a question vector has shape `(384,)`. The dimensions and encoding space must agree to compare matching coordinates meaningfully. Sorting followed by taking the first k records turns six similarities into two selected passages.
+For Q1, embeddings select A2 at k=1, add T1 at k=2, and add B1 at k=3. Coverage remains 1/2 because A1 ranks fourth (0.37424892). T1 adds training/current-record conditions and B1 adds booking information; neither supplies the missing access-hours window. The proposed k=4 and hybrid experiments in the reflection have not been run.
 
-The first 12 displayed coordinates are only a view into each vector. All 384 contribute to ranking; a single large or small coordinate cannot identify the passage's meaning. The inspection file includes lengths, a coordinate-product subtotal, the remaining-coordinate subtotal, and a direct-cosine cross-check. Calculations use unrounded model output; rounding is for display only.
+## How retrieval works
 
-The model returns float32 coordinates. The inspection accumulates their products in float64, so its final digits can differ slightly from the float32 ranking dot product; the script checks that they agree within tolerance.
+Each blank-line-separated paragraph in `docs/` is one chunk. Its label and filename are metadata; only the paragraph text is searched or encoded.
 
-The pretrained embedding model selects candidate evidence. A separate language model conversation writes the answer from those passages. This workflow supplies context without changing the generator's learned weights.
+- **Load:** `load_chunks()`, `retriever.py` lines 27-37, reads the three files and validates six unique labels.
+- **Score keywords:** `words()` and `keyword_rank()`, lines 40-46, lowercase text, extract alphanumeric words, remove exactly the assigned stopwords, and count distinct shared query words. Repeating a word adds no points; there is no stemming or synonym expansion.
+- **Rank keywords:** line 47 sorts by descending score, then ascending chunk ID. Selection keeps up to k positive results. Q1/A1 scores 3 from `00`, `graduate`, and `trained`; the shared clock token `00` does not mean the code understands time.
+- **Encode:** line 76 uses `encode_document()` for passages; line 100 uses `encode_query()` for the question. Both normalize embeddings and return numpy arrays. The assignment runner encodes the documents once and reuses them across questions. These role-specific methods have the same underlying encoding behavior for this model.
+- **Score embeddings:** line 103 computes a dot product across all matching coordinates. Line 106 ranks descending with an ID tie-break, then takes the first k without a relevance threshold. A cosine calculation using vector lengths cross-checks the scores.
 
-## Evidence and human review
+The document matrix is `(6, 384)` and a question vector is `(384,)`. Compatible dimensions and the same encoding space allow matching coordinates to be compared. Near-unit vector lengths make dot products equal cosine similarity within numerical tolerance. All 384 coordinates contribute, although only 12 are displayed. Among displayed values, T1's fifth coordinate is the minimum (-0.1167) and its twelfth the maximum (0.1357), counting from 1. Neither individually labels the passage's meaning.
 
-- `evidence/pre-run-prediction.md`: Q1 evidence prediction made before retrieval.
-- `evidence/keyword-q1.txt`: actual baseline output.
-- `evidence/embedding-inspection.txt`: real model vectors and similarity calculation.
-- `evidence/retrieval-runs.txt`: all four questions through both methods, k=2.
-- `results.csv`: selected IDs and scores in rank order, with assistant evidence-completeness judgments and observations awaiting your independent review. Q4 is false for both methods because the answer is absent; successful abstention is a separate answer-audit result.
-- `evidence/k-experiment.txt`: actual Q1 selections and required coverage for k=1, 2, 3.
-- `evidence/answer-handoff-q1.txt` and `answer-handoff-q4.txt`: paste each into a separate fresh conversation with no project file access. Each contains only the assignment's answer instruction, question, and selected passages.
-- `evidence/answer-audit-q1.md` and `answer-audit-q4.md`: original project-chat answers, revisions, and assistant claim audits. Q1 records a correction for referencing an unseen chunk. The required isolated answer runs and human audit remain pending. Append those actual outputs without overwriting the preserved responses.
-- `evidence/answer-audit-q3.md`: additional answer and citation review requested by the user.
-- `REQUIREMENTS_AUDIT.md`: requirement-by-requirement completion status and remaining submission gaps.
-- `HUMAN_REVIEW.md`: review sequence and outstanding submission items.
+The model returns float32 coordinates. The product inspection accumulates them in float64, so final digits can differ slightly from the ranking dot product; agreement is checked within tolerance. Calculations use unrounded model output and round only for display.
 
-Do not treat an embedding score as evidence that a passage answers the question, and do not compare raw keyword scores numerically with cosine scores. Q4's answer is absent from the corpus even though the embedding retriever always returns the top k passages. Q1 coverage counts both A1 and A2, even if A2 alone could support a yes/no decision.
+Retrieval selects candidate evidence. A separate answer conversation turns the selected passages into a cited answer. This changes the context supplied to the generator, not its learned weights. A citation is accepted only if its passage supports the specific claim; missing evidence requires an explicit acknowledgment.
 
-The saved rankings show keyword coverage of 2/2 for Q1 versus embedding coverage of 1/2. Both methods cover Q2 and Q3 (1/1 each). At k=1, 2, and 3, Q1 embedding coverage stays 1/2: T1 adds training conditions and B1 adds booking information, while A1 remains fourth. The minimum and maximum displayed coordinates are T1's fifth (-0.1167) and twelfth (0.1357), counting from 1; neither coordinate individually labels meaning.
+## Submission contents
 
-Verify CSV review preservation with `.\.venv\Scripts\python.exe -m unittest discover -s tests -v`. Dependency consistency can be checked with `.\.venv\Scripts\python.exe -m pip check`.
+| File or directory | Purpose |
+| --- | --- |
+| `docs/` | Six verbatim source passages across access, training, and booking files. |
+| `retriever.py`, `run_assignment.py` | CLI retrieval and reproducible evidence generation. |
+| `results.csv` | All four comparisons, ranked scores, completeness judgments, observations. |
+| `evidence/pre-run-prediction.md`, `keyword-q1.txt` | Initial Q1 evidence prediction and actual keyword run. |
+| `evidence/embedding-inspection.txt` | Real vectors, dimensions, normalization, coordinate products, and similarity check. |
+| `evidence/retrieval-runs.txt`, `k-experiment.txt` | Actual comparisons and Q1 k experiment. |
+| `evidence/answer-handoff-q1.txt`, `answer-handoff-q4.txt` | Prescribed prompt, question, and only the selected passages for fresh answer conversations. |
+| `evidence/answer-audit-q1.md`, `answer-audit-q4.md` | Preserved original project-chat answers, claim checks, revisions, and provenance. |
+| `evidence/answer-audit-q3.md` | Additional Q3 review requested during the project. |
+| [reflections.md](reflections.md) | Mingxi Wang's supplied reflection, edited to the 150-word limit. |
+| [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) | Completed artifacts and outstanding course requirements. |
 
-## GitHub submission
+`run_assignment.py` regenerates retrieval output and handoffs. It preserves existing CSV judgments only when recorded evidence is unchanged; changed rows need a new review. Existing audit files are preserved and must be checked if the selected passages change. Output was generated locally, not borrowed.
 
-The local repository is initialized. Review artifacts and finish human-only items before submission. Then create or identify your GitHub repository named `cedar-rag`, commit the source and evidence, and push. `.gitignore` excludes the virtual environment, temporary files, model cache, and bytecode. A GitHub destination and the sign-up-sheet URL were not supplied. No submission is claimed until the push and sign-up-sheet entry actually succeed.
+## Verification and remaining steps
 
-A network-enabled GitHub authentication check succeeded for `harrrisw` during the completion audit. No remote is configured, and an authenticated check could not resolve `harrrisw/cedar-rag`; repository creation/destination and visibility remain to be confirmed.
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -m pip check
+```
+
+The saved runs passed source-text, ranking, dimension, normalization, similarity, and CSV checks. The four regression tests protect existing reviews when evidence is regenerated. See [verification evidence](evidence/verification.txt).
+
+**Before final course submission:** complete the two fresh answer conversations without project file access, append their actual outputs and your personal claim audits, publish the repository, and submit its URL to the sign-up sheet. Existing project-chat answer reviews do not fulfill the fresh-conversation requirement. See the [submission checklist](SUBMISSION_CHECKLIST.md) for exact steps.

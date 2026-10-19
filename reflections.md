@@ -1,11 +1,5 @@
-# Individual reflections — human writing required
+# Individual reflection
 
-Participant: Mingxi Wang. Working individually; partner role swapping does not apply.
+**Mingxi Wang — working individually**
 
-Each participant must write their own reflection of at most 150 words. The assignment explicitly says not to ask Codex to write the personal explanation.
-
-Address the path from a question to a cited answer, one limitation actually observed in the saved runs, and one change you would test next. If working with a partner, include a separate named reflection for each person.
-
-## Mingxi Wang's reflection
-
-PENDING: write your own reflection here, at most 150 words. See REFLECTION_IDEAS.md for assistant suggestions; those notes are not your submitted reflection.
+The workflow retrieves passages for a question, generates a cited answer, and checks claims against evidence. For Q1, keywords selected A1 and A2; A1's score included `00`, an accidental overlap between clock times rather than an understanding of time. The six passage embeddings formed a `(6, 384)` matrix, and the question a `(384,)` vector. All 384 coordinates contributed to similarity; one coordinate could not identify meaning. Embeddings were not always more complete: Q1 coverage stayed 1/2 at k=1, 2, and 3, versus 2/2 for keywords. Q3 retrieved T1 despite the qualification/renewal paraphrase (0.74202764). Q4 required abstention because wavelength was unspecified; positive similarity did not establish answerability. The original Q1 answer named unseen A1, showing that even true claims must respect supplied evidence. Next, I would test k=4 or combined keyword/embedding candidates, comparing coverage against extra context. Neither experiment has been run.

@@ -28,4 +28,13 @@ PASS: Q1/Q4 handoffs contain exactly the selected passages with complete source 
 PASS: quoted Q3/Q4 claim support matches the selected source passages verbatim.
 PASS: original Q1 response is preserved with the unseen-A1 reference identified and a bounded revision recorded.
 PASS: four CSV review-preservation regression tests and pip dependency check passed.
-PENDING: isolated fresh-conversation Q1/Q4 outputs, student review, names/reflections, and remote/course submission.
+At this earlier audit, isolated fresh-conversation Q1/Q4 outputs, student review, names/reflections, and remote/course submission were pending.
+
+Submission cleanup after the participant supplied the reflection:
+PASS: Mingxi Wang is recorded as the sole participant.
+PASS: the supplied reflection was edited to 141 words and saved in reflections.md.
+PASS: redundant drafting documents were consolidated into SUBMISSION_CHECKLIST.md.
+PASS: source documents, retriever code, raw run output, and preserved original answer audits are unchanged.
+PASS: all comparison judgments agree with required-ID coverage; documentation links resolve.
+PASS: four review-preservation regression tests and pip check passed again.
+PENDING: isolated fresh-conversation Q1/Q4 outputs and personal claim review, repository publication, and course submission. No k=4 or hybrid experiment is claimed.
