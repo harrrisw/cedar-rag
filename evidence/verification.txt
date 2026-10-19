@@ -1,0 +1,21 @@
+Source and keyword checks (system Python 3.13.4):
+PASS: exactly six unique chunks.
+PASS: each labeled paragraph matches a paragraph extracted from the supplied DOCX verbatim.
+PASS: the specified stopword list is removed and repeated words count once.
+PASS: the query 'laser' ranks tied positive results A2, B1, T1 by ascending ID.
+PASS: metadata-only query tokens 'A1 B1 txt' contribute no score.
+PASS: an unmatched query prints 'No matching passages.'
+
+Q1 independent manual count for A1:
+Distinct shared words = 00, graduate, trained; score = 3.
+The question's 'student' does not match 'students'; 'operate' does not match 'operating'.
+Clock punctuation splits '19:00' and '08:00' into alphanumeric tokens, creating a shared '00'.
+The baseline selects A1 and A2. This automated review is provided for a human to independently confirm.
+
+Final run checks:
+PASS: actual CPU model run completed with (6, 384) document matrix and (384,) queries.
+PASS: runtime assertions verified approximately unit vector lengths, cosine agreement, and coordinate-product totals.
+PASS: four CSV rows contain ranked ID/score pairs and untouched human judgment fields.
+PASS: each answer handoff contains exactly its two selected embedding passages.
+PASS: pip check found no broken requirements.
+PASS: both Python files compile.
