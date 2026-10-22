@@ -41,4 +41,47 @@ Claim support:
 
 The revision removes the original reference to unseen A1 while retaining the supported operating condition and the missing-hours acknowledgment. Assistant audit: PASS for the supplied evidence. This correction demonstrates why a factually true statement can still violate the restricted evidence boundary.
 
-The original is preserved above. Start a fresh conversation without project file access using the existing Q1 handoff, append its unedited actual response here, and independently audit it. Do not represent this project-conversation revision as an isolated run or a student-authored audit.
+The historical project-conversation original and revision remain preserved above. Actual fresh answer-generation outputs were subsequently obtained and are appended below. The student's personal claim audit remains pending.
+
+
+## Actual fresh original answer - October 21, 2026
+
+Source: `answer-run-ce8cb66af6be/response-q1.md`. The original prescribed handoff was used verbatim in a new conversation. The following response is copied without editing:
+
+No. A trained graduate student may not operate the laser alone at 19:00: two trained people must be present whenever the laser operates, including during general laboratory access hours. [A2] Operating also requires a current training record, with training renewed every 12 months; the passages do not establish whether the student’s training is current. [T1]
+
+Claim–support list:
+
+- Solo operation at 19:00 is prohibited because two trained people must be present whenever the laser operates. [A2]
+- Training must be renewed every 12 months, and a current training record is required to operate. [T1]
+- The student’s current training status is not established by the supplied passages. Unsupported.
+
+### Assistant precheck of the fresh original
+
+The response retains A2's operating condition and T1's training requirements, but does not acknowledge that the access-hours window is absent. This fails the assignment's complete time-condition audit. Its final use of "Unsupported" for the missing individual training status also blurs missing information with an asserted unsupported fact. Original response and event logs are retained.
+
+## Actual single-instruction correction
+
+Instruction: `answer-revision-q1-instruction.txt`. The question and selected A2/T1 passages are unchanged. Source: `answer-run-e3bbd8c36740/response-q1.md`. Unedited revised response:
+
+The student may not operate the laser alone at 19:00: two trained people must be present whenever it is operating. [A2] Laser training must be renewed every 12 months, and operation requires a current training record. [T1]
+
+The passages supply no general access-hours window, so permission to enter at 19:00 cannot be established from these passages. They also do not establish whether this student’s training record is current.
+
+Factual claims and support:
+
+- Two trained people must be present whenever the laser operates, including during general laboratory access hours; solo operation at 19:00 therefore is not permitted. [A2]
+- Training must be renewed every 12 months, and a current training record is required before operation. [T1]
+
+Missing information, rather than factual claims about the student: the passages omit the general access-hours window, permission to enter at 19:00, and the student’s current training-record status.
+
+### Assistant precheck of the revised response
+
+| Claim or limitation | Source check | Proposed verdict for human review |
+| --- | --- | --- |
+| Solo operation is not permitted; two trained people must be present. | A2 explicitly requires two trained people whenever the laser operates. | Supported. |
+| Training renews every 12 months and operation requires a current record. | T1 explicitly states both requirements. | Supported. |
+| Permission to enter at 19:00 cannot be established. | Neither A2 nor T1 provides the general access-hours window. | Correct bounded missing-information statement. |
+| This individual's current record status is not established. | No supplied passage describes this individual's record. | Correct missing-information statement; no status invented. |
+
+The correction improves the missing-hours explanation and separates missing information from affirmative claims. No unseen chunk or access-hours window is introduced. Two independent thread IDs and zero tool events are recorded in the raw logs; see `answer-generation.md`. **Human audit pending:** personally confirm or revise these verdicts in `AUDIT_HANDOFF.md`.

@@ -38,3 +38,15 @@ PASS: source documents, retriever code, raw run output, and preserved original a
 PASS: all comparison judgments agree with required-ID coverage; documentation links resolve.
 PASS: four review-preservation regression tests and pip check passed again.
 PENDING: isolated fresh-conversation Q1/Q4 outputs and personal claim review, repository publication, and course submission. No k=4 or hybrid experiment is claimed.
+
+October 21, 2026 - automated preparation completed before human audit:
+PASS: original Q1 and Q4 generated in distinct fresh Codex CLI conversations outside the project with execution/browsing/app/delegation features disabled.
+PASS: event logs show no tool executions; intentionally disabled code-mode host emits a retained fail-closed diagnostic.
+PASS: original fresh Q1 omitted the access-hours limitation; it is preserved, followed by one actual correction with identical question/passages.
+PASS: raw model messages, output files, audit copies, distinct thread IDs, and exact input preservation verified.
+PASS: original Q4 abstains without inventing a wavelength in the assistant precheck.
+PASS: original retrieval code, corpus, actual vectors/rankings, CSV judgments, and 141-word reflection remain unchanged.
+PASS: four regression tests, pip check, Python compilation, and document-link checks passed.
+PASS: private GitHub repository created and history published at https://github.com/harrrisw/cedar-rag.
+PASS: course sign-up-sheet link recovered from the original DOCX hyperlink and final entry prepared.
+PENDING HUMAN JUDGMENT: AUDIT_HANDOFF.md claim/retrieval/reflection verdicts and instructor access. Final course submission follows those decisions.

@@ -2,7 +2,9 @@
 
 **Mingxi Wang | Individual submission**
 
-A classroom retrieval-augmented generation workflow over six fictional Cedar Lab passages. It compares keyword matching with real CPU embeddings, inspects retrieved evidence, and prepares passage-only inputs for cited answers. The fictional rules are not operational laboratory guidance.
+A classroom retrieval-augmented generation workflow over six fictional Cedar Lab passages. It compares keyword matching with real CPU embeddings, inspects retrieved evidence, and generates cited answers in fresh, tool-disabled conversations. The fictional rules are not operational laboratory guidance.
+
+Repository: [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag) (private). **The remaining student task is the [audit handoff](AUDIT_HANDOFF.md).** Final course submission follows that audit and the instructor-access check.
 
 ## Run the project
 
@@ -57,17 +59,24 @@ Retrieval selects candidate evidence. A separate answer conversation turns the s
 | --- | --- |
 | `docs/` | Six verbatim source passages across access, training, and booking files. |
 | `retriever.py`, `run_assignment.py` | CLI retrieval and reproducible evidence generation. |
+| `generate_answers.py` | Fresh, tool-disabled Codex answer generation outside the project directory; never overwrites earlier runs. |
 | `results.csv` | All four comparisons, ranked scores, completeness judgments, observations. |
 | `evidence/pre-run-prediction.md`, `keyword-q1.txt` | Initial Q1 evidence prediction and actual keyword run. |
 | `evidence/embedding-inspection.txt` | Real vectors, dimensions, normalization, coordinate products, and similarity check. |
 | `evidence/retrieval-runs.txt`, `k-experiment.txt` | Actual comparisons and Q1 k experiment. |
 | `evidence/answer-handoff-q1.txt`, `answer-handoff-q4.txt` | Prescribed prompt, question, and only the selected passages for fresh answer conversations. |
-| `evidence/answer-audit-q1.md`, `answer-audit-q4.md` | Preserved original project-chat answers, claim checks, revisions, and provenance. |
+| `evidence/answer-audit-q1.md`, `answer-audit-q4.md` | Preserved project-chat history plus actual fresh original answers, Q1's single correction, and proposed claim verdicts. |
+| `evidence/answer-generation.md`, `answer-run-*/` | Fresh-thread provenance, exact inputs, unedited outputs, raw events, and manifests. |
 | `evidence/answer-audit-q3.md` | Additional Q3 review requested during the project. |
 | [reflections.md](reflections.md) | Mingxi Wang's supplied reflection, edited to the 150-word limit. |
 | [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) | Completed artifacts and outstanding course requirements. |
+| [AUDIT_HANDOFF.md](AUDIT_HANDOFF.md) | One place for the student's retrieval, claim-support, and reflection decisions, plus the final course entry. |
 
 `run_assignment.py` regenerates retrieval output and handoffs. It preserves existing CSV judgments only when recorded evidence is unchanged; changed rows need a new review. Existing audit files are preserved and must be checked if the selected passages change. Output was generated locally, not borrowed.
+
+The prescribed Q1/Q4 prompts have now been run in separate fresh Codex CLI conversations, each in an empty directory outside the project with command tools, browsing, apps, plugins, and delegation disabled. The original Q1 response omitted the missing access-hours window; it was preserved and corrected once using unchanged A2/T1 passages. Q4 abstained without inventing a wavelength. Separate thread IDs and zero tool executions are recorded in [answer-generation provenance](evidence/answer-generation.md). These machine checks and assistant prechecks do not replace the student's personal audit.
+
+Saved answer output can be inspected without regenerating it. To reproduce original answers with an authenticated Codex CLI, run `.\.venv\Scripts\python.exe generate_answers.py`. To repeat the single-question correction, run `.\.venv\Scripts\python.exe generate_answers.py --questions q1 --instruction-file evidence/answer-revision-q1-instruction.txt`. New runs create unique evidence directories; generated wording can differ.
 
 ## Verification and remaining steps
 
@@ -78,4 +87,4 @@ Retrieval selects candidate evidence. A separate answer conversation turns the s
 
 The saved runs passed source-text, ranking, dimension, normalization, similarity, and CSV checks. The four regression tests protect existing reviews when evidence is regenerated. See [verification evidence](evidence/verification.txt).
 
-**Before final course submission:** complete the two fresh answer conversations without project file access, append their actual outputs and your personal claim audits, publish the repository, and submit its URL to the sign-up sheet. Existing project-chat answer reviews do not fulfill the fresh-conversation requirement. See the [submission checklist](SUBMISSION_CHECKLIST.md) for exact steps.
+**Before final course submission:** complete your personal [audit handoff](AUDIT_HANDOFF.md), confirm instructor access to the private repository, and submit its URL to the course sign-up sheet linked in the handoff. Answer generation, evidence preparation, and repository publication are complete.

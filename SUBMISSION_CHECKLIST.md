@@ -12,18 +12,21 @@ Participant: **Mingxi Wang**, working individually. Partner role swapping is not
 - [x] Four-row `results.csv` with ranked IDs/scores, required evidence, completeness judgments, and observations.
 - [x] Actual Q1 k=1 and k=3 experiments, alongside k=2, with evidence coverage and interpretation in the README.
 - [x] Original project-chat Q1/Q4 answers preserved with claim audits and revised responses; the Q1 unseen-source failure is retained.
+- [x] Q1 and Q4 generated in distinct fresh, tool-disabled Codex conversations outside the project directory, with exact inputs and raw logs saved.
+- [x] Fresh Q1's missing access-hours acknowledgment preserved as a failure; one revised instruction rerun with identical A2/T1 passages. Q4 correctly abstains in the assistant precheck.
 - [x] Extra Q3 answer audit requested by the participant.
 - [x] Participant's supplied reflection edited for clarity and the 150-word limit (`reflections.md`). Proposed k=4 and hybrid tests remain explicitly unrun.
 - [x] Runnable commands, plain-language code explanation, pinned installed dependencies, and regression tests.
 - [x] No invented or borrowed embedding output. Cache, virtual environment, bytecode, scratch files, and generated archives are excluded from Git.
+- [x] Private GitHub repository created and project history pushed to [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag).
+- [x] Actual course sign-up-sheet URL recovered from the assignment hyperlink, and the final course entry prepared in [AUDIT_HANDOFF.md](AUDIT_HANDOFF.md).
 
 ## Required before final course submission
 
-- [ ] Generate Q1 and Q4 in two fresh conversations without project file access. Paste only the corresponding `evidence/answer-handoff-*.txt` contents. Existing project-chat answers do not satisfy this isolation requirement.
-- [ ] Append each unedited fresh response to its existing audit file; personally check every factual claim, citation, and missing-information statement. If an answer fails, preserve it, revise the instruction once, rerun with the same passages, and record whether it helped.
-- [ ] Confirm the completeness judgments in `results.csv` and the final wording of the personal reflection.
-- [ ] Choose the GitHub repository destination and visibility, then push the repository. Authentication was verified for `harrrisw`; no remote is configured. The latest authenticated lookup could not resolve `harrrisw/cedar-rag`.
-- [ ] Submit the published repository URL to the course sign-up sheet. The sheet URL has not been supplied.
+- [ ] Complete the personal claim audit of the saved original/corrected Q1 and original Q4 responses in [AUDIT_HANDOFF.md](AUDIT_HANDOFF.md). The responses and single Q1 correction are already generated and preserved.
+- [ ] Confirm the completeness judgments in `results.csv` and the final wording of the personal reflection using that same handoff.
+- [ ] Confirm instructor access to the private repository: an instructor invitation or authorization to make it public requires the participant's choice.
+- [ ] After the audit, submit the prepared repository entry to the [course sign-up sheet](https://docs.google.com/spreadsheets/d/1ZewIG5udWWpk3Kdrab5yDbsWDV4gnH3liKobIAp7HG4/edit?usp=sharing). This final submission is deferred until approval; no course entry is claimed.
 
 ## Evidence checks to use during review
 
@@ -36,4 +39,4 @@ Participant: **Mingxi Wang**, working individually. Partner role swapping is not
 
 For Q1, the answer must retain the two-trained-people condition and acknowledge that the supplied A2/T1 passages do not specify an access-hours window. It must not name unseen A1 or assert that 19:00 is permitted. For Q4, the answer must identify the missing wavelength and provide no guessed value.
 
-The saved assistant audits and CSV assessments document assisted work. The participant's reflection is based on the text supplied in chat and edited for length and clarity. No independent answer run, personal claim audit, publication, or course submission is marked complete without its actual result.
+The saved assistant audits and CSV assessments document assisted work. The participant's reflection is based on the text supplied in chat and edited for length and clarity. Actual fresh answer-generation logs and GitHub publication now exist. Only the student's personal judgments, instructor-access choice, and approval-dependent course submission remain.
