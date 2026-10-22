@@ -4,7 +4,7 @@
 
 A classroom retrieval-augmented generation workflow over six fictional Cedar Lab passages. It compares keyword matching with real CPU embeddings, inspects retrieved evidence, and generates cited answers in fresh, tool-disabled conversations. The fictional rules are not operational laboratory guidance.
 
-Repository: [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag) (private). **The remaining student task is the [audit handoff](AUDIT_HANDOFF.md).** Final course submission follows that audit and the instructor-access check.
+Repository: [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag) (private). Mingxi Wang's [overall audit](evidence/student-audit.md) accepts the accuracy with reservations about reasoning quality. Final course submission still requires the instructor-access check; the recorded decisions are summarized in the [audit handoff](AUDIT_HANDOFF.md).
 
 ## Run the project
 
@@ -71,6 +71,7 @@ Retrieval selects candidate evidence. A separate answer conversation turns the s
 | [reflections.md](reflections.md) | Mingxi Wang's supplied reflection, edited to the 150-word limit. |
 | [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md) | Completed artifacts and outstanding course requirements. |
 | [AUDIT_HANDOFF.md](AUDIT_HANDOFF.md) | One place for the student's retrieval, claim-support, and reflection decisions, plus the final course entry. |
+| [evidence/student-audit.md](evidence/student-audit.md) | Participant's original and edited audit, with an explicit clarification of evidence completeness. |
 
 `run_assignment.py` regenerates retrieval output and handoffs. It preserves existing CSV judgments only when recorded evidence is unchanged; changed rows need a new review. Existing audit files are preserved and must be checked if the selected passages change. Output was generated locally, not borrowed.
 
@@ -87,4 +88,4 @@ Saved answer output can be inspected without regenerating it. To reproduce origi
 
 The saved runs passed source-text, ranking, dimension, normalization, similarity, and CSV checks. The four regression tests protect existing reviews when evidence is regenerated. See [verification evidence](evidence/verification.txt).
 
-**Before final course submission:** complete your personal [audit handoff](AUDIT_HANDOFF.md), confirm instructor access to the private repository, and submit its URL to the course sign-up sheet linked in the handoff. Answer generation, evidence preparation, and repository publication are complete.
+**Before final course submission:** confirm instructor access to the private repository and submit its URL to the course sign-up sheet linked in the [handoff](AUDIT_HANDOFF.md). Answer generation, evidence preparation, repository publication, and recording the participant's supplied overall audit are complete. The audit does not change Q1's partial embedding coverage or Q4's absent wavelength evidence.

@@ -23,8 +23,8 @@ Participant: **Mingxi Wang**, working individually. Partner role swapping is not
 
 ## Required before final course submission
 
-- [ ] Complete the personal claim audit of the saved original/corrected Q1 and original Q4 responses in [AUDIT_HANDOFF.md](AUDIT_HANDOFF.md). The responses and single Q1 correction are already generated and preserved.
-- [ ] Confirm the completeness judgments in `results.csv` and the final wording of the personal reflection using that same handoff.
+- [x] Record the participant's overall audit, explicit revised-Q1 and Q4 judgments, and reservations about reasoning quality in [student-audit.md](evidence/student-audit.md), preserving the original wording. Detailed assistant claim checks remain separately attributed.
+- [x] Incorporate the participant's evidence-sufficiency assessment without changing Q1's partial embedding coverage or Q4's absent answer. The participant-supplied reflection remains 141 words.
 - [ ] Confirm instructor access to the private repository: an instructor invitation or authorization to make it public requires the participant's choice.
 - [ ] After the audit, submit the prepared repository entry to the [course sign-up sheet](https://docs.google.com/spreadsheets/d/1ZewIG5udWWpk3Kdrab5yDbsWDV4gnH3liKobIAp7HG4/edit?usp=sharing). This final submission is deferred until approval; no course entry is claimed.
 
@@ -39,4 +39,4 @@ Participant: **Mingxi Wang**, working individually. Partner role swapping is not
 
 For Q1, the answer must retain the two-trained-people condition and acknowledge that the supplied A2/T1 passages do not specify an access-hours window. It must not name unseen A1 or assert that 19:00 is permitted. For Q4, the answer must identify the missing wavelength and provide no guessed value.
 
-The saved assistant audits and CSV assessments document assisted work. The participant's reflection is based on the text supplied in chat and edited for length and clarity. Actual fresh answer-generation logs and GitHub publication now exist. Only the student's personal judgments, instructor-access choice, and approval-dependent course submission remain.
+The saved assistant audits and CSV assessments document assisted work. The participant's reflection and overall audit are based on text supplied in chat and edited for clarity. Actual fresh answer-generation logs and GitHub publication exist. Instructor-access choice and final course submission remain; no new student calculation or claim-by-claim review beyond the supplied evaluation is invented.

@@ -84,4 +84,11 @@ Missing information, rather than factual claims about the student: the passages 
 | Permission to enter at 19:00 cannot be established. | Neither A2 nor T1 provides the general access-hours window. | Correct bounded missing-information statement. |
 | This individual's current record status is not established. | No supplied passage describes this individual's record. | Correct missing-information statement; no status invented. |
 
-The correction improves the missing-hours explanation and separates missing information from affirmative claims. No unseen chunk or access-hours window is introduced. Two independent thread IDs and zero tool events are recorded in the raw logs; see `answer-generation.md`. **Human audit pending:** personally confirm or revise these verdicts in `AUDIT_HANDOFF.md`.
+The correction improves the missing-hours explanation and separates missing information from affirmative claims. No unseen chunk or access-hours window is introduced. Two independent thread IDs and zero tool events are recorded in the raw logs; see `answer-generation.md`. **Participant evaluation:** see the supplied audit recorded below; the detailed precheck verdicts above remain assistant assessments.
+
+
+## Participant audit recorded - Mingxi Wang
+
+Mingxi Wang judges the revised Q1 explanation better and the overall accuracy generally acceptable, while noting that logical connections and understanding may remain rough. The assistant's accuracy clarification is that the revised answer distinguishes the operating rule from missing access-hours evidence; it does not establish that 19:00 entry is permitted.
+
+The participant's exact original wording and edited audit are preserved in `student-audit.md`. Earlier "human audit pending" statements describe the status before this message. This records the supplied overall evaluation; it does not invent a new independent calculation or additional claim-by-claim review.

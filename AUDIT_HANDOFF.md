@@ -2,7 +2,7 @@
 
 All preparatory work is complete: the code and real retrieval evidence are saved, the 141-word reflection is recorded, the two original answer prompts were run in fresh conversations, the Q1 failure was preserved and retried once, and the project is published privately at [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag).
 
-Only your personal judgments are left below. The proposed verdicts are assistant checks, not a completed student audit. Record confirmations or corrections, or send them in chat for recording.
+Mingxi Wang's supplied audit is now recorded in [student-audit.md](evidence/student-audit.md), including the original wording, an edited version, and an accuracy clarification. The participant accepts the overall accuracy with reservations about logical connections and depth of understanding. Detailed numerical and claim checks below remain identified as assistant assessments rather than newly performed student calculations.
 
 ## 1. Confirm retrieval evidence judgments
 
@@ -17,7 +17,7 @@ Open [results.csv](results.csv) and the [actual retrieval output](evidence/retri
 
 Also confirm Q1/A1's keyword score by counting `00`, `graduate`, and `trained` once each. In the [k experiment](evidence/k-experiment.txt), check that adding T1 and then B1 never recovers A1: coverage stays 1/2 at k=1, 2, and 3.
 
-**Your decision:** PENDING - confirm these judgments or identify changes.
+**Participant decision recorded:** The evidence is sufficient for evaluating this project's scope. This does not change the per-question findings: Q1 embeddings remain partial and Q4 remains unanswerable from the sources. See the preserved audit and accuracy clarification in `evidence/student-audit.md`.
 
 ## 2. Personally audit the actual generated answers
 
@@ -33,15 +33,15 @@ Read [Q1's complete audit](evidence/answer-audit-q1.md), including its preserved
 
 For each claim, confirm that its cited passage supports it. Distinguish a conclusion about missing information from an explicit statement in a source. Check that the revised Q1 answer does not import unseen A1 or claim that 19:00 is within permitted access hours. The Q1 correction has already been run with the same passages; no additional answer-generation work is required unless your audit finds another issue.
 
-**Your Q1 decision:** PENDING - supported/comprehensive, or specify a problem.
+**Participant Q1 decision recorded:** The revised answer provides a better explanation of the relationship between operation and time. Accuracy clarification: its improvement is the distinction between the supported operating condition and the missing access-hours window; permission to enter at 19:00 is not established.
 
-**Your Q4 decision:** PENDING - supported abstention, or specify a problem.
+**Participant Q4 decision recorded:** The requested evidence was not supplied. The participant's overall accuracy assessment is generally acceptable, with reservations about reasoning depth. The answer's abstention is consistent with the missing wavelength.
 
 ## 3. Confirm your reflection
 
 Read [reflections.md](reflections.md). It is your supplied reflection, edited to **141 words**. Confirm that it represents your understanding and that k=4 and hybrid retrieval are proposals, not completed experiments.
 
-**Your decision:** PENDING - accurate as edited, or provide changes.
+**Reflection status:** The participant's supplied reflection is recorded and edited to 141 words. No new personal reflection was invented. The subsequent audit above is recorded separately rather than changing the reflection or increasing its word count.
 
 ## Access and final submission after your audit
 
@@ -53,4 +53,4 @@ The actual [course sign-up sheet](https://docs.google.com/spreadsheets/d/1ZewIG5
 - Repository: **https://github.com/harrrisw/cedar-rag**
 - Working arrangement: **Individual**
 
-The course entry is deferred until you approve the work; it is not claimed as submitted. A concise response can give your retrieval verdict, Q1 verdict, Q4 verdict, reflection verdict, and instructor-access choice.
+The participant's overall audit is recorded with its reservations. Instructor access still needs a decision before final course submission. No invitation, public visibility change, or course entry is claimed.

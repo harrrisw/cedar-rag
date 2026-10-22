@@ -50,3 +50,9 @@ PASS: four regression tests, pip check, Python compilation, and document-link ch
 PASS: private GitHub repository created and history published at https://github.com/harrrisw/cedar-rag.
 PASS: course sign-up-sheet link recovered from the original DOCX hyperlink and final entry prepared.
 PENDING HUMAN JUDGMENT: AUDIT_HANDOFF.md claim/retrieval/reflection verdicts and instructor access. Final course submission follows those decisions.
+
+Participant-audit incorporation:
+PASS: original participant wording preserved in student-audit.md alongside the edited audit and explicit accuracy clarification.
+PASS: acceptance with reasoning reservations recorded; no independent student recalculation or new claim-by-claim review is invented.
+PASS: Q1 partial embedding coverage and Q4 absent evidence remain unchanged, as do all recorded numerical fields, actual answers, and the 141-word reflection.
+PENDING: instructor access and final course entry.
