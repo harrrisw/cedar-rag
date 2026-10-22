@@ -2,7 +2,6 @@
 from contextlib import redirect_stdout
 import csv
 from io import StringIO
-import platform
 import subprocess
 import sys
 
@@ -81,12 +80,8 @@ def main():
         passages = "\n\n".join(f"[{c.id}] {c.text}" for c, score in selections[qid])
         packet = f"{PROMPT}\n\nQuestion: {QUESTIONS[qid]}\n\nSupplied passages:\n{passages}\n"
         (EVIDENCE / f"answer-handoff-{qid.lower()}.txt").write_text(packet, encoding="utf-8")
-        audit = EVIDENCE / f"answer-audit-{qid.lower()}.md"
-        if not audit.exists():
-            audit.write_text(f"# {qid} answer audit — pending human action\n\nStart a fresh conversation without project file access. Paste only answer-handoff-{qid.lower()}.txt. Preserve the answer below before auditing it.\n\n## Original answer\n\nPENDING\n\n## Human claim audit\n\nFor each claim, record its citation, supporting words, and supported/unsupported verdict. Check missing evidence explicitly.\n\nPENDING\n\n## Revision if needed\n\nIf the answer fails, preserve it, revise the instruction once, rerun with the same passages, and record whether it helped. Otherwise mark not needed.\n\nPENDING\n", encoding="utf-8")
     packages = subprocess.check_output([sys.executable, "-m", "pip", "freeze"], text=True)
     (ROOT / "requirements-lock.txt").write_text(packages, encoding="utf-8")
-    (EVIDENCE / "environment.txt").write_text(f"Python {platform.python_version()}\nCPU run; locally generated output, not borrowed.\n{packages}", encoding="utf-8")
     print("Saved vector inspection, four comparisons, k experiment, results.csv, and isolated answer handoffs. Existing judgments are preserved when recorded evidence is unchanged; new or changed rows need review.")
 
 
