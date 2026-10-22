@@ -4,7 +4,7 @@
 
 A teaching RAG workflow over six fictional Cedar Lab passages: prepare chunks, compare keyword and embedding retrieval, generate cited answers from selected evidence, and audit claims and missing information. These fictional rules are not operational laboratory guidance.
 
-Repository: [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag) (private). The participant's [audit](evidence/student-audit.md) accepts overall accuracy with reservations about reasoning quality. Instructor access and the final course entry are still outstanding; see the submission note below.
+Repository: [harrrisw/cedar-rag](https://github.com/harrrisw/cedar-rag) (public). The participant's [audit](evidence/student-audit.md) accepts overall accuracy with reservations about reasoning quality. The repository is accessible to the instructor without an invitation; the final course entry remains outstanding.
 
 ## Setup and run
 
@@ -81,4 +81,4 @@ To repeat answer generation, start separate fresh conversations without project 
 
 Final checks on October 22, 2026: the offline CPU rerun reproduced the saved vectors, rankings, scores, and k experiment exactly; all six source texts matched the handout; CSV judgments, response provenance, failed-answer preservation, reflection length, and documentation links were verified. Four regression tests, the standard-library-only no-match command, Python compilation, and dependency checks passed.
 
-**Final course steps:** give the instructor access to the private repository (or authorize public visibility), then submit **Mingxi Wang - https://github.com/harrrisw/cedar-rag - Individual** to the [course sign-up sheet](https://docs.google.com/spreadsheets/d/1ZewIG5udWWpk3Kdrab5yDbsWDV4gnH3liKobIAp7HG4/edit?usp=sharing). Neither an instructor invitation nor a course-sheet entry is claimed as completed.
+**Final course step:** submit **Mingxi Wang - https://github.com/harrrisw/cedar-rag - Individual** to the [course sign-up sheet](https://docs.google.com/spreadsheets/d/1ZewIG5udWWpk3Kdrab5yDbsWDV4gnH3liKobIAp7HG4/edit?usp=sharing). The repository is public; no course-sheet entry is claimed as completed.
